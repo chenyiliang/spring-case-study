@@ -30,5 +30,6 @@
 	<modules>
 		<module>spring-jetty-embed01</module>
 		<module>spring-event01</module>
+		<module>spring-event02</module>
 	</modules>
 </project>
