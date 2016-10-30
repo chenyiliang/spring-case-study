@@ -7,12 +7,18 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<springframework.version>3.2.17.RELEASE</springframework.version>
+		<springframework.version>4.3.3.RELEASE</springframework.version>
 		<springframework.plugin.version>1.2.0.RELEASE</springframework.plugin.version>
 		<jetty.version>9.4.0.M1</jetty.version>
 		<jackson.version>2.8.2</jackson.version>
 		<slf4j.version>1.7.21</slf4j.version>
 		<logback.version>1.1.7</logback.version>
+		<logback.ext.spring.version>0.1.4</logback.ext.spring.version>
+		<apache.httpclient.version>4.5.2</apache.httpclient.version>
+		<commons.fileupload.version>1.3.2</commons.fileupload.version>
+		<junit.version>4.12</junit.version>
+		<servlet.api.version>3.1.0</servlet.api.version>
+		<jsp.api.version>2.3.1</jsp.api.version>
 	</properties>
 
 	<build>
@@ -33,5 +39,6 @@
 		<module>spring-event01</module>
 		<module>spring-event02</module>
 		<module>spring-plugin</module>
+		<module>spring-mvc-charset01</module>
 	</modules>
 </project>
