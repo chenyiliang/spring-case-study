@@ -41,5 +41,6 @@
 		<module>spring-event02</module>
 		<module>spring-plugin</module>
 		<module>spring-mvc-charset01</module>
+		<module>spring-async01</module>
 	</modules>
 </project>
