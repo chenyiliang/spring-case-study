@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var url = 'ws://' + window.location.host + '/websocket/marco';
+		var sock = new WebSocket(url);
+
+		sock.onopen = function() {
+			console.log('Opening');
+			sayMarco();
+		}
+
+		sock.onmessage = function(e) {
+			console.log('Received message: ', e.data);
+			setTimeout(function() {
+				sayMarco()
+			}, 2000);
+		}
+
+		function sayMarco() {
+			console.log('Sending Marco!');
+			sock.send('Marco!')
+		}
+	</script>
+</body>
+</html>

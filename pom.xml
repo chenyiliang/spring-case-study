@@ -44,5 +44,6 @@
 		<module>spring-mvc-charset01</module>
 		<module>spring-async01</module>
 		<module>spring-rabbit</module>
+		<module>spring-websocket</module>
 	</modules>
 </project>
