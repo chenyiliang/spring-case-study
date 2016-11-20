@@ -8,8 +8,9 @@
 
 	<properties>
 		<springframework.version>3.2.17.RELEASE</springframework.version>
-		<springframework4.version>4.3.4.RELEASE</springframework4.version>
+		<springframework4.version>4.3.3.RELEASE</springframework4.version>
 		<springframework.plugin.version>1.2.0.RELEASE</springframework.plugin.version>
+		<springframework.amqp.version>1.6.5.RELEASE</springframework.amqp.version>
 		<jetty.version>9.4.0.M1</jetty.version>
 		<jackson.version>2.8.2</jackson.version>
 		<slf4j.version>1.7.21</slf4j.version>
@@ -42,5 +43,6 @@
 		<module>spring-plugin</module>
 		<module>spring-mvc-charset01</module>
 		<module>spring-async01</module>
+		<module>spring-rabbit</module>
 	</modules>
 </project>
