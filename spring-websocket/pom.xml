@@ -37,6 +37,11 @@
 			<version>${springframework4.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<version>${springframework4.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
@@ -76,7 +81,8 @@
 				<version>9.4.0.M0</version>
 				<configuration>
 					<webAppConfig>
-						<contextPath>/websocket</contextPath>
+						<!-- <contextPath>/websocket</contextPath> -->
+						<contextPath>/stomp</contextPath>
 					</webAppConfig>
 				</configuration>
 			</plugin>
