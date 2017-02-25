@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="threadPool" class="org.eclipse.jetty.util.thread.QueuedThreadPool">
+		<property name="minThreads" value="10" />
+		<property name="maxThreads" value="50" />
+	</bean>
+
+	<bean id="servletContextHandler" class="org.eclipse.jetty.servlet.ServletContextHandler">
+		<property name="contextPath" value="/" />
+	</bean>
+
+	<bean id="server" class="org.eclipse.jetty.server.Server"
+		init-method="start" destroy-method="stop">
+		<constructor-arg ref="threadPool" />
+		<property name="handler" ref="servletContextHandler" />
+		<property name="connectors" ref="connectors" />
+	</bean>
+
+	<bean id="connector" class="org.eclipse.jetty.server.ServerConnector">
+		<constructor-arg ref="server" />
+		<property name="port" value="8080" />
+	</bean>
+
+	<util:list id="connectors">
+		<ref bean="connector" />
+	</util:list>
+
+	<bean id="dispatcherServlet" class="org.springframework.web.servlet.DispatcherServlet">
+		<property name="contextConfigLocation" value="classpath:spring-context.xml" />
+	</bean>
+
+	<bean id="dispatcherServletHolder" class="org.eclipse.jetty.servlet.ServletHolder">
+		<constructor-arg index="0" ref="dispatcherServlet" />
+	</bean>
+
+	<bean
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetObject" ref="servletContextHandler" />
+		<property name="targetMethod" value="addServlet" />
+		<property name="arguments">
+			<array>
+				<ref bean="dispatcherServletHolder" />
+				<value>/</value>
+			</array>
+		</property>
+	</bean>
+
+
+	<bean id="corsConfiguration" class="org.springframework.web.cors.CorsConfiguration">
+		<property name="allowCredentials" value="true" />
+		<property name="allowedHeaders" value="*" />
+		<property name="allowedMethods" value="*" />
+		<property name="allowedOrigins" value="*" />
+		<property name="maxAge" value="86400" />
+	</bean>
+
+	<bean id="corsConfigurationSource"
+		class="org.springframework.web.cors.UrlBasedCorsConfigurationSource">
+		<property name="corsConfigurations">
+			<map>
+				<entry key="/**" value-ref="corsConfiguration" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="corsFilter" class="org.springframework.web.filter.CorsFilter">
+		<constructor-arg ref="corsConfigurationSource" />
+	</bean>
+
+	<bean id="corsFilterHolder" class="org.eclipse.jetty.servlet.FilterHolder">
+		<constructor-arg ref="corsFilter" />
+	</bean>
+
+	<bean
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetObject" ref="servletContextHandler" />
+		<property name="targetMethod" value="addFilter" />
+		<property name="arguments">
+			<array>
+				<ref bean="corsFilterHolder" />
+				<value>/*</value>
+				<null></null>
+			</array>
+		</property>
+	</bean>
+</beans>
