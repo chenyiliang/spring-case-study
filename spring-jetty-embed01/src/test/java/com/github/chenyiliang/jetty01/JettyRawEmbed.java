@@ -43,8 +43,7 @@ public class JettyRawEmbed {
 		UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
 		corsConfigurationSource.setCorsConfigurations(Collections.singletonMap("/**", corsConfiguration));
 		CorsFilter corsFilter = new CorsFilter(corsConfigurationSource);
-		servletContextHandler.addFilter(new FilterHolder(corsFilter), "/*", EnumSet.allOf(DispatcherType.class));
-
+		servletContextHandler.addFilter(new FilterHolder(corsFilter), "/*", null);
 		server.start();
 	}
 }

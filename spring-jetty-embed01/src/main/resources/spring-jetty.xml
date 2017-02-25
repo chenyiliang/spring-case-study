@@ -48,4 +48,43 @@
 			</array>
 		</property>
 	</bean>
+
+
+	<bean id="corsConfiguration" class="org.springframework.web.cors.CorsConfiguration">
+		<property name="allowCredentials" value="true" />
+		<property name="allowedHeaders" value="*" />
+		<property name="allowedMethods" value="*" />
+		<property name="allowedOrigins" value="*" />
+		<property name="maxAge" value="86400" />
+	</bean>
+
+	<bean id="corsConfigurationSource"
+		class="org.springframework.web.cors.UrlBasedCorsConfigurationSource">
+		<property name="corsConfigurations">
+			<map>
+				<entry key="/**" value-ref="corsConfiguration" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="corsFilter" class="org.springframework.web.filter.CorsFilter">
+		<constructor-arg ref="corsConfigurationSource" />
+	</bean>
+
+	<bean id="corsFilterHolder" class="org.eclipse.jetty.servlet.FilterHolder">
+		<constructor-arg ref="corsFilter" />
+	</bean>
+
+	<bean
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetObject" ref="servletContextHandler" />
+		<property name="targetMethod" value="addFilter" />
+		<property name="arguments">
+			<array>
+				<ref bean="corsFilterHolder" />
+				<value>/*</value>
+				<null></null>
+			</array>
+		</property>
+	</bean>
 </beans>
