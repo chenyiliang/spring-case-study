@@ -1,6 +1,7 @@
 package com.github.chenyiliang.jetty01;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumSet;
 
 import javax.servlet.DispatcherType;
@@ -33,13 +34,14 @@ public class JettyRawEmbed {
 		ServletHolder dispatcherServletHolder = new ServletHolder(dispatcherServlet);
 		servletContextHandler.addServlet(dispatcherServletHolder, "/");
 
-		UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		corsConfiguration.setAllowCredentials(true);
 		corsConfiguration.setAllowedHeaders(Arrays.asList("*"));
 		corsConfiguration.setAllowedMethods(Arrays.asList("*"));
 		corsConfiguration.setAllowedOrigins(Arrays.asList("*"));
-		corsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
+
+		UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
+		corsConfigurationSource.setCorsConfigurations(Collections.singletonMap("/**", corsConfiguration));
 		CorsFilter corsFilter = new CorsFilter(corsConfigurationSource);
 		servletContextHandler.addFilter(new FilterHolder(corsFilter), "/*", EnumSet.allOf(DispatcherType.class));
 
