@@ -2,9 +2,6 @@ package com.github.chenyiliang.jetty01;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.EnumSet;
-
-import javax.servlet.DispatcherType;
 
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
