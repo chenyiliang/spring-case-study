@@ -46,5 +46,6 @@
 		<module>spring-rabbit</module>
 		<module>spring-websocket</module>
 		<module>spring-tomcat-embed01</module>
+		<module>spring-cache01</module>
 	</modules>
 </project>
